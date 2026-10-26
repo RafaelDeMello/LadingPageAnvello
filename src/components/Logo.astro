@@ -27,7 +27,7 @@ const svg = { sm: 'h-3.5 w-[13px]', md: 'h-[19px] w-[18px]', lg: 'h-5 w-[19px]' 
     product && (
       <span
         class:list={[
-          'mb-0.5 ml-2.5 text-[13px] font-medium tracking-[.12em]',
+          'mb-0.5 ml-2.5 text-[13px] font-medium tracking-[.12em] max-[480px]:hidden',
           dark ? 'text-[#7fb3a6]' : 'text-brand',
         ]}
         aria-hidden="true"

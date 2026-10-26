@@ -4,13 +4,46 @@ import Button from './Button.astro';
 import { nav, APP_URL, PRODUCT, hero } from '../content/site';
 ---
 
+<!-- Mobile: hambúrguer | logo (centro) | Começar. Desktop (lg): logo | links + botões. -->
 <header
-  class="glass sticky top-3.5 z-10 mx-[clamp(12px,3vw,40px)] mt-3.5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-[20px] border border-white/70 px-[clamp(18px,3vw,36px)] py-3.5"
+  class="glass sticky top-3.5 z-10 mx-[clamp(12px,3vw,40px)] mt-3.5 grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-3 rounded-[20px] border border-white/70 px-[clamp(12px,3vw,36px)] py-3 lg:flex lg:justify-between lg:gap-x-6 lg:py-3.5"
 >
-  <a href="/" class="rounded-lg" aria-label={`Anvello ${PRODUCT}, página inicial`}>
+  <details class="group justify-self-start lg:hidden" data-menu>
+    <summary
+      class="flex size-11 cursor-pointer list-none items-center justify-center rounded-xl text-ink marker:hidden hover:bg-sand"
+      aria-label="Menu"
+    >
+      <svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path class="group-open:hidden" d="M4 7h16M4 12h16M4 17h16"></path>
+        <path class="hidden group-open:block" d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </summary>
+    <nav
+      aria-label="Menu"
+      class="absolute top-full left-0 mt-2 w-56 rounded-2xl border border-line bg-paper p-2 shadow-lg"
+    >
+      <ul class="flex flex-col">
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} class="block rounded-xl px-4 py-3 text-ink hover:bg-sand">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </details>
+
+  <a href="/" class="justify-self-center rounded-lg" aria-label={`Anvello ${PRODUCT}, página inicial`}>
     <Logo product={PRODUCT} />
   </a>
-  <nav aria-label="Principal" class="flex items-center gap-x-[clamp(16px,2.6vw,32px)] text-[15px]">
+
+  <nav
+    aria-label="Principal"
+    class="flex items-center justify-end gap-x-[clamp(16px,2.6vw,32px)] text-[15px]"
+  >
     <ul class="hidden items-center gap-x-[clamp(16px,2.4vw,30px)] lg:flex">
       {
         nav.map((item) => (
@@ -22,28 +55,22 @@ import { nav, APP_URL, PRODUCT, hero } from '../content/site';
         ))
       }
     </ul>
-    <details class="lg:hidden">
-      <summary
-        class="cursor-pointer list-none rounded-xl px-4 py-2.5 text-ink marker:hidden hover:bg-sand"
-        >Menu</summary
-      >
-      <ul
-        class="absolute top-full right-0 mt-2 flex w-56 flex-col rounded-2xl border border-line bg-paper p-2 shadow-lg"
-      >
-        {
-          nav.map((item) => (
-            <li>
-              <a href={item.href} class="block rounded-xl px-4 py-3 text-ink hover:bg-sand">
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </details>
     <div class="flex items-center gap-2.5">
       <Button href={APP_URL} variant="ghost" class="max-sm:hidden">Entrar</Button>
-      <Button href={APP_URL}>{hero.primary}</Button>
+      <Button href={APP_URL} class="max-sm:px-4">{hero.primary}</Button>
     </div>
   </nav>
 </header>
+
+<script>
+  // Fecha o menu ao escolher um item ou ao pressionar Esc.
+  const menu = document.querySelector<HTMLDetailsElement>('[data-menu]');
+  if (menu) {
+    menu.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) menu.open = false;
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') menu.open = false;
+    });
+  }
+</script>
