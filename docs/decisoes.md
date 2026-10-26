@@ -13,3 +13,4 @@
 - **Imagem OG:** `public/og.png` (1200×630) gerada a partir de SVG; fontes do sistema, trocar por arte final quando houver.
 - **TypeScript 6** (o `astro check` ainda não suporta TS 7).
 - **Sitemap/robots:** estáticos em `public/`.
+- **Âncoras sem hash:** `src/scripts/anchors.ts` (externo, compatível com a CSP) intercepta links `/#secao` da própria página, rola com `scrollIntoView` (instantâneo com `prefers-reduced-motion`), move o foco para a seção e fecha o menu mobile. Sem `history.pushState`: o "voltar" sai do site. Vindo de outra página (ex.: `/privacidade`), o link navega normalmente e o hash aparece. Sem JS, os links funcionam como âncoras comuns.

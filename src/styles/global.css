@@ -35,6 +35,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 96px; }
 body { background: var(--color-cream); color: var(--color-ink); font-family: var(--font-sans); }
 ::selection { background: rgb(47 111 98 / 0.22); }
 
+/* Seções recebem foco programático ao rolar pelo menu; o anel fica nos controles. */
+[tabindex='-1']:focus { outline: none; }
 :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 3px; border-radius: 6px; }
 .on-dark :focus-visible { outline-color: #9fcfc2; }
 

@@ -61,16 +61,3 @@ import { nav, APP_URL, PRODUCT, hero } from '../content/site';
     </div>
   </nav>
 </header>
-
-<script>
-  // Fecha o menu ao escolher um item ou ao pressionar Esc.
-  const menu = document.querySelector<HTMLDetailsElement>('[data-menu]');
-  if (menu) {
-    menu.addEventListener('click', (e) => {
-      if ((e.target as HTMLElement).closest('a')) menu.open = false;
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') menu.open = false;
-    });
-  }
-</script>
