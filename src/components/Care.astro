@@ -1,0 +1,38 @@
+---
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import Badge from './Badge.astro';
+import { care } from '../content/site';
+---
+
+<Section id="cuidado" class="on-dark bg-night" inner="flex flex-wrap items-center gap-16">
+  <div class="flex flex-[1_1_380px] flex-col gap-[18px]">
+    <Eyebrow dark>{care.eyebrow}</Eyebrow>
+    <h2 class="text-[clamp(30px,3.6vw,46px)] leading-[1.15] font-bold text-[#f2f2f3] text-balance">
+      {care.title}
+    </h2>
+    <p class="max-w-[46ch] text-lg leading-[1.7] text-[#a9adb1] text-pretty">{care.text}</p>
+  </div>
+  <ul class="grid flex-[1.2_1_420px] grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-5">
+    {
+      care.items.map((i) => (
+        <li
+          class:list={[
+            'flex flex-col gap-2 rounded-[18px] px-6 py-[26px]',
+            i.highlight ? 'bg-brand' : 'bg-night-2',
+          ]}
+        >
+          <div class="flex items-start justify-between gap-3">
+            <h3 class:list={['text-lg font-semibold', i.highlight ? 'text-white' : 'text-[#f2f2f3]']}>
+              {i.title}
+            </h3>
+            {i.soon && <Badge dark />}
+          </div>
+          <p class:list={['text-[15px] leading-[1.6]', i.highlight ? 'text-[#e4efec]' : 'text-[#a9adb1]']}>
+            {i.text}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

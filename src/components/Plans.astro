@@ -1,0 +1,25 @@
+---
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import Badge from './Badge.astro';
+import Button from './Button.astro';
+import { plans } from '../content/site';
+---
+
+<Section id="planos" class="bg-sand" inner="flex flex-col gap-12">
+  <div class="flex max-w-[640px] flex-col gap-3.5">
+    <Eyebrow>{plans.eyebrow}</Eyebrow>
+    <h2 class="text-[clamp(30px,3.6vw,46px)] leading-[1.15] font-bold text-balance">{plans.title}</h2>
+  </div>
+  <div class="flex max-w-[640px] flex-col gap-5 rounded-[22px] bg-mint px-[30px] py-9">
+    <div class="flex items-center gap-3">
+      <p class="text-[22px] font-bold text-brand-deep">ReceitasAI</p>
+      <Badge />
+    </div>
+    <p class="text-base leading-[1.65] text-[#3d6b5f] text-pretty">{plans.text}</p>
+    <div class="flex flex-wrap items-center gap-4">
+      <Button disabled size="lg">{plans.button} · em breve</Button>
+    </div>
+    <p class="text-[13px] text-[#3d6b5f]">{plans.note}</p>
+  </div>
+</Section>

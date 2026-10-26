@@ -1,0 +1,36 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+import Mockups from './Mockups.astro';
+import { hero, disclaimer, APP_URL } from '../content/site';
+---
+
+<section
+  class="overflow-hidden px-[clamp(20px,5vw,64px)] pt-[clamp(48px,7vw,104px)] pb-[72px]"
+  aria-labelledby="hero-titulo"
+>
+  <div class="mx-auto flex w-full max-w-[1320px] flex-col gap-14 min-[1400px]:flex-row min-[1400px]:items-center">
+    <div class="flex flex-col gap-7 min-[1400px]:flex-[1_1_440px]">
+      <Eyebrow>{hero.eyebrow}</Eyebrow>
+      <h1
+        id="hero-titulo"
+        class="text-[clamp(38px,4.8vw,68px)] min-[1400px]:text-[clamp(44px,3.8vw,58px)] leading-[1.04] font-bold tracking-[-.02em] text-balance"
+      >
+        {hero.title}
+      </h1>
+      <p class="max-w-[46ch] text-xl leading-[1.65] text-muted text-pretty">{hero.text}</p>
+      <div class="flex flex-wrap items-center gap-3.5 pt-1">
+        <Button href={APP_URL} size="lg">{hero.primary}</Button>
+        <Button href="/#como" variant="ghost" size="lg">{hero.secondary}</Button>
+      </div>
+      <p class="text-sm text-muted">{hero.note}</p>
+      <p class="max-w-[52ch] border-l-2 border-brand/40 pl-3.5 text-sm leading-[1.55] text-muted">
+        {disclaimer}
+      </p>
+    </div>
+    <div class="min-[1400px]:flex-[1.2_1_820px]">
+      <Mockups />
+      <p class="mt-4 text-center text-xs text-muted min-[1400px]:text-left">{hero.mockupNote}</p>
+    </div>
+  </div>
+</section>

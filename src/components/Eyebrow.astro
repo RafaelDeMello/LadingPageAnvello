@@ -1,0 +1,15 @@
+---
+interface Props {
+  dark?: boolean;
+}
+const { dark = false } = Astro.props;
+---
+
+<p
+  class:list={[
+    'font-label text-xs font-medium tracking-[.4em] uppercase',
+    dark ? 'text-[#7fb3a6]' : 'text-brand',
+  ]}
+>
+  <slot />
+</p>

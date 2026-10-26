@@ -1,0 +1,42 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'ghost';
+  size?: 'md' | 'lg';
+  disabled?: boolean;
+  class?: string;
+}
+const { href, variant = 'primary', size = 'md', disabled = false, class: className = '' } = Astro.props;
+const base =
+  'inline-flex items-center justify-center font-medium leading-tight transition-colors';
+const sizes = {
+  md: 'rounded-xl px-5 py-2.5 text-[15px] whitespace-nowrap',
+  lg: 'rounded-[14px] px-[30px] py-[17px] text-[17px]',
+}[size];
+const variants = {
+  primary: 'bg-brand text-white hover:bg-brand-hover',
+  ghost: 'text-ink hover:bg-sand',
+}[variant];
+const isLink = Boolean(href) && !disabled;
+---
+
+{
+  isLink ? (
+    <a href={href} class:list={[base, sizes, variants, className]}>
+      <slot />
+    </a>
+  ) : (
+    <button
+      type="button"
+      disabled={disabled}
+      class:list={[
+        base,
+        sizes,
+        disabled ? 'cursor-not-allowed bg-sand-dark text-muted' : variants,
+        className,
+      ]}
+    >
+      <slot />
+    </button>
+  )
+}

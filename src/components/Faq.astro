@@ -1,0 +1,26 @@
+---
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import { faq } from '../content/site';
+---
+
+<Section id="faq" inner="flex flex-wrap gap-14">
+  <div class="flex flex-[1_1_300px] flex-col gap-3.5">
+    <Eyebrow>{faq.eyebrow}</Eyebrow>
+    <h2 class="text-[clamp(30px,3.6vw,46px)] leading-[1.15] font-bold text-balance">{faq.title}</h2>
+  </div>
+  <div class="flex flex-[2_1_460px] flex-col">
+    {
+      faq.items.map((item, i) => (
+        <details class="group border-b border-line" open={i === 0}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-6 text-[19px] font-medium marker:hidden">
+            <span>{item.q}</span>
+            <span class="flex-none text-2xl font-normal text-brand group-open:hidden" aria-hidden="true">+</span>
+            <span class="hidden flex-none text-2xl font-normal text-brand group-open:inline" aria-hidden="true">−</span>
+          </summary>
+          <p class="mb-6 max-w-[60ch] text-base leading-[1.7] text-muted text-pretty">{item.a}</p>
+        </details>
+      ))
+    }
+  </div>
+</Section>

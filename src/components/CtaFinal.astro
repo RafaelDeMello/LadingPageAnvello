@@ -1,0 +1,19 @@
+---
+import Button from './Button.astro';
+import { cta, APP_URL } from '../content/site';
+---
+
+<div class="px-[clamp(20px,5vw,64px)] pb-[clamp(56px,7vw,96px)]">
+  <section
+    class="cta-cut mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-8 rounded-[24px_24px_0_24px] bg-mint p-[clamp(40px,6vw,80px)]"
+    aria-labelledby="cta-titulo"
+  >
+    <h2
+      id="cta-titulo"
+      class="flex-[1_1_380px] text-[clamp(28px,3.6vw,46px)] leading-[1.15] font-bold text-brand-deep text-balance"
+    >
+      {cta.title}
+    </h2>
+    <Button href={APP_URL} size="lg">{cta.button}</Button>
+  </section>
+</div>

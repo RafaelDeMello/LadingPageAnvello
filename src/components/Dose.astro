@@ -1,0 +1,97 @@
+---
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import { dose } from '../content/site';
+const d = dose.demo;
+---
+
+<Section id="dose" class="bg-sand" inner="flex flex-wrap items-center gap-16">
+  <div class="flex flex-[1_1_380px] flex-col gap-[18px]">
+    <Eyebrow>{dose.eyebrow}</Eyebrow>
+    <h2 class="text-[clamp(30px,3.6vw,46px)] leading-[1.15] font-bold text-balance">{dose.title}</h2>
+    <p class="max-w-[52ch] text-lg leading-[1.7] text-muted text-pretty">{dose.text}</p>
+    <ul class="mt-2 flex flex-col gap-3">
+      {
+        dose.points.map((p) => (
+          <li class="flex items-start gap-3 text-base leading-[1.5]">
+            <span class="mt-[7px] size-2 flex-none rounded-full bg-brand" aria-hidden="true" />
+            <span>{p}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div
+    class="flex flex-[1_1_380px] flex-col gap-5 rounded-[22px] bg-paper p-[clamp(22px,3vw,34px)] shadow-[0_1px_0_#e8e1d7]"
+    data-dose-demo
+    data-max="500"
+    data-mgkg="10"
+    data-conc="100"
+  >
+    <div class="flex items-center justify-between gap-3">
+      <p class="font-label text-xs font-medium tracking-[.3em] text-brand uppercase">{d.label}</p>
+      <p class="text-sm font-medium text-muted">{d.drug}</p>
+    </div>
+    <p class="text-sm leading-[1.55] text-muted">{d.rule}</p>
+
+    <div class="flex flex-col gap-2">
+      <label for="peso" class="text-sm font-medium">{d.weightLabel}</label>
+      <input
+        id="peso"
+        type="number"
+        inputmode="decimal"
+        min="1"
+        max="150"
+        step="0.1"
+        value={d.weightDefault}
+        autocomplete="off"
+        class="w-40 rounded-xl border border-[#cfc7bb] bg-paper px-4 py-3 text-lg font-medium"
+        data-peso
+      />
+    </div>
+
+    <div class="flex flex-col gap-3 rounded-2xl bg-mint p-5 text-brand-deep" aria-live="polite">
+      <p class="text-2xl leading-tight font-bold" data-resultado>—</p>
+      <p class="text-sm leading-[1.6]" data-memoria>
+        Informe o peso para ver a conta.
+      </p>
+    </div>
+    <p class="text-[13px] leading-[1.5] text-muted">{d.privacy}</p>
+  </div>
+</Section>
+
+<script>
+  // Demonstração local: o peso nunca sai do navegador (sem rede, sem armazenamento).
+  const root = document.querySelector<HTMLElement>('[data-dose-demo]');
+  if (root) {
+    const mgKg = Number(root.dataset.mgkg);
+    const max = Number(root.dataset.max);
+    const mgPer5 = Number(root.dataset.conc);
+    const input = root.querySelector<HTMLInputElement>('[data-peso]')!;
+    const out = root.querySelector<HTMLElement>('[data-resultado]')!;
+    const memo = root.querySelector<HTMLElement>('[data-memoria]')!;
+    const fmt = (n: number) => n.toLocaleString('pt-BR', { maximumFractionDigits: 1 });
+
+    const update = () => {
+      const kg = Number(input.value.replace(',', '.'));
+      if (!Number.isFinite(kg) || kg < 1 || kg > 150) {
+        out.textContent = '—';
+        memo.textContent = 'Informe um peso entre 1 e 150 kg para ver a conta.';
+        return;
+      }
+      const raw = kg * mgKg;
+      const mg = Math.min(raw, max);
+      const ml = (mg / mgPer5) * 5;
+      out.textContent = `${fmt(mg)} mg (${fmt(ml)} mL) a cada 6 horas`;
+      memo.textContent =
+        raw > max
+          ? `${fmt(kg)} kg × ${mgKg} mg/kg = ${fmt(raw)} mg → limitado à dose máxima de ${max} mg. ` +
+            `${fmt(mg)} mg ÷ ${mgPer5} mg × 5 mL = ${fmt(ml)} mL.`
+          : `${fmt(kg)} kg × ${mgKg} mg/kg = ${fmt(raw)} mg (abaixo do máximo de ${max} mg). ` +
+            `${fmt(mg)} mg ÷ ${mgPer5} mg × 5 mL = ${fmt(ml)} mL.`;
+    };
+    input.addEventListener('input', update);
+    update();
+  }
+</script>

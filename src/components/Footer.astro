@@ -1,0 +1,18 @@
+---
+import Logo from './Logo.astro';
+import { disclaimer, footer } from '../content/site';
+---
+
+<footer
+  class="on-dark flex flex-wrap items-center justify-between gap-4 bg-footer px-[clamp(20px,5vw,64px)] pt-7 pb-10 text-[13px] text-[#9da1a5]"
+>
+  <Logo size="sm" dark />
+  <p class="max-w-[60ch] leading-[1.55]">{disclaimer}</p>
+  <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+    <a href="/privacidade" class="text-[#c4c8cc] underline-offset-4 hover:underline"
+      >{footer.privacy}</a
+    >
+    <a href="/termos" class="text-[#c4c8cc] underline-offset-4 hover:underline">{footer.terms}</a>
+    <span>{footer.copyright}</span>
+  </div>
+</footer>

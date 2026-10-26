@@ -1,0 +1,14 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+  inner?: string;
+}
+const { id, class: className = '', inner = '' } = Astro.props;
+---
+
+<section id={id} class:list={['px-[clamp(20px,5vw,64px)] py-[clamp(56px,7vw,112px)]', className]}>
+  <div class:list={['mx-auto w-full max-w-[1320px]', inner]}>
+    <slot />
+  </div>
+</section>

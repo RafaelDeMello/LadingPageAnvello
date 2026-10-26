@@ -1,0 +1,49 @@
+---
+import Logo from './Logo.astro';
+import Button from './Button.astro';
+import { nav, APP_URL, PRODUCT, hero } from '../content/site';
+---
+
+<header
+  class="glass sticky top-3.5 z-10 mx-[clamp(12px,3vw,40px)] mt-3.5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-[20px] border border-white/70 px-[clamp(18px,3vw,36px)] py-3.5"
+>
+  <a href="/" class="rounded-lg" aria-label={`Anvello ${PRODUCT}, página inicial`}>
+    <Logo product={PRODUCT} />
+  </a>
+  <nav aria-label="Principal" class="flex items-center gap-x-[clamp(16px,2.6vw,32px)] text-[15px]">
+    <ul class="hidden items-center gap-x-[clamp(16px,2.4vw,30px)] lg:flex">
+      {
+        nav.map((item) => (
+          <li>
+            <a href={item.href} class="text-muted hover:text-ink">
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <details class="lg:hidden">
+      <summary
+        class="cursor-pointer list-none rounded-xl px-4 py-2.5 text-ink marker:hidden hover:bg-sand"
+        >Menu</summary
+      >
+      <ul
+        class="absolute top-full right-0 mt-2 flex w-56 flex-col rounded-2xl border border-line bg-paper p-2 shadow-lg"
+      >
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} class="block rounded-xl px-4 py-3 text-ink hover:bg-sand">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </details>
+    <div class="flex items-center gap-2.5">
+      <Button href={APP_URL} variant="ghost" class="max-sm:hidden">Entrar</Button>
+      <Button href={APP_URL}>{hero.primary}</Button>
+    </div>
+  </nav>
+</header>

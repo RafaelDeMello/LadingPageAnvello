@@ -1,0 +1,25 @@
+---
+import Section from './Section.astro';
+import Eyebrow from './Eyebrow.astro';
+import { steps } from '../content/site';
+---
+
+<Section id="como" inner="flex flex-col gap-14">
+  <div class="flex max-w-[640px] flex-col gap-3.5">
+    <Eyebrow>{steps.eyebrow}</Eyebrow>
+    <h2 class="text-[clamp(30px,3.6vw,46px)] leading-[1.15] font-bold text-balance">{steps.title}</h2>
+  </div>
+  <ol class="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-6">
+    {
+      steps.items.map((s) => (
+        <li class="flex flex-col gap-3.5 rounded-[20px] bg-paper px-8 py-9">
+          <span class="font-condensed text-5xl leading-none font-bold text-brand" aria-hidden="true">
+            {s.n}
+          </span>
+          <h3 class="text-[22px] font-bold">{s.title}</h3>
+          <p class="text-base leading-[1.65] text-muted text-pretty">{s.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+</Section>

@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Steps from '../components/Steps.astro';
+import Dose from '../components/Dose.astro';
+import Care from '../components/Care.astro';
+import Plans from '../components/Plans.astro';
+import Faq from '../components/Faq.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <div class="page-bg flex min-w-0 flex-col">
+    <Header />
+    <main id="conteudo">
+      <Hero />
+      <Steps />
+      <Dose />
+      <Care />
+      <Plans />
+      <Faq />
+      <CtaFinal />
+    </main>
+    <Footer />
+  </div>
+</Layout>

@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+
+@font-face { font-family: 'Barlow'; font-weight: 400; font-style: normal; font-display: swap; src: url('/fonts/barlow-400.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow'; font-weight: 500; font-style: normal; font-display: swap; src: url('/fonts/barlow-500.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow'; font-weight: 600; font-style: normal; font-display: swap; src: url('/fonts/barlow-600.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow'; font-weight: 700; font-style: normal; font-display: swap; src: url('/fonts/barlow-700.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow'; font-weight: 800; font-style: normal; font-display: swap; src: url('/fonts/barlow-800.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow Condensed'; font-weight: 700; font-style: normal; font-display: swap; src: url('/fonts/barlow-condensed-700.woff2') format('woff2'); }
+@font-face { font-family: 'Jost'; font-weight: 400 500; font-style: normal; font-display: swap; src: url('/fonts/jost-latin.woff2') format('woff2'); }
+
+/* Paleta extraída do protótipo (Claude Design). */
+@theme {
+  --color-cream: #f7f3ee;
+  --color-paper: #fffdfa;
+  --color-sand: #f0eae1;
+  --color-sand-dark: #e5ded3;
+  --color-line: #e8e1d7;
+  --color-ink: #34312d;
+  --color-muted: #6a645c;
+  --color-subtle: #8a8379;
+  --color-brand: #2f6f62;
+  --color-brand-hover: #3a8071;
+  --color-brand-deep: #244d44;
+  --color-mint: #e4eee9;
+  --color-mint-line: #c8dcd2;
+  --color-night: #1d1f20;
+  --color-night-2: #26292b;
+  --color-footer: #16181a;
+  --font-sans: 'Barlow', ui-sans-serif, system-ui, sans-serif;
+  --font-condensed: 'Barlow Condensed', 'Barlow', sans-serif;
+  --font-label: 'Jost', 'Barlow', sans-serif;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+body { background: var(--color-cream); color: var(--color-ink); font-family: var(--font-sans); }
+::selection { background: rgb(47 111 98 / 0.22); }
+
+:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 3px; border-radius: 6px; }
+.on-dark :focus-visible { outline-color: #9fcfc2; }
+
+.page-bg { background: linear-gradient(180deg, #dcece5 0, #eaf1ec 220px, #f7f3ee 640px); }
+.glass {
+  background: linear-gradient(110deg, rgb(220 236 229 / 0.78) 0%, rgb(247 243 238 / 0.62) 55%, rgb(255 253 250 / 0.7) 100%);
+  backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: 0 8px 30px rgb(60 80 70 / 0.1), inset 0 1px 0 rgb(255 255 255 / 0.8);
+}
+.cta-cut { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 56px), calc(100% - 56px) 100%, 0 100%); }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
